@@ -21,27 +21,27 @@ class AlarmClock {
     }
 
     clearAlarms() {
-        this.alarmCollection = []; // Очищаем коллекцию будильников
-        this.stop(); // Останавливаем интервал
+        this.alarmCollection = []; 
+        this.stop(); 
     }
 
     getCurrentFormattedTime() {
         const date = new Date();
-        return date.toTimeString().slice(0, 5); // Формат HH:MM
+        return date.toTimeString().slice(0, 5); 
     }
 
     start() {
         if (this.intervalId) {
-            return; // Интервал уже запущен
+            return; 
         }
 
         this.intervalId = setInterval(() => {
             const currentTime = this.getCurrentFormattedTime();
             this.alarmCollection.forEach(alarm => {
                 if (alarm.time === currentTime && alarm.canCall) {
-                    alarm.canCall = false; // Запрещаем повторный вызов
-                    alarm.callback(); // Вызываем колбек
-                    // Не вызываем resetAllCalls здесь, чтобы не сбрасывать canCall для других будильников
+                    alarm.canCall = false; 
+                    alarm.callback(); 
+                    
                 }
             });
         }, 1000);
@@ -49,7 +49,7 @@ class AlarmClock {
 
     stop() {
         clearInterval(this.intervalId);
-        this.intervalId = null; // Устанавливаем intervalId в null
+        this.intervalId = null; 
     }
 
     resetAllCalls() {
